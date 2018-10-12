@@ -22,15 +22,41 @@ namespace ClassLibrary1
             var xml = XElement.Load(@"https://apiservice.mol.gov.tw/OdService/download/A17000000J-020104-62d");
             var nodes = xml.Descendants("row").ToList();
 
-            for(var i = 0; i < nodes.Count; i++)
-            {
-                var node = nodes[i];
-                OpenData item = new OpenData();
-                item.縣市別 = getValue(node, "縣市別");
-                item.應開戶數 = getValue(node, "應開戶數");
-                item.已開戶數 = getValue(node, "已開戶數");
-                result.Add(item);
-            }
+            //for(var i = 0; i < nodes.Count; i++)
+            //{
+            //    var node = nodes[i];
+            //    OpenData item = new OpenData();
+            //    item.縣市別 = getValue(node, "縣市別");
+            //    item.應開戶數 = getValue(node, "應開戶數");
+            //    item.已開戶數 = getValue(node, "已開戶數");
+            //    result.Add(item);
+            //}
+
+            nodes.ToList()
+                .ForEach(node =>
+                {
+                    OpenData item = new OpenData();
+
+                    item.縣市別 = getValue(node, "縣市別");
+                    item.應開戶數 = getValue(node, "應開戶數");
+                    item.已開戶數 = getValue(node, "已開戶數");
+                    result.Add(item);
+
+
+                });
+            //result = nodes.ToList()
+            //    .Select(node =>
+            //    {
+            //        OpenData item = new OpenData();
+
+            //        item.縣市別 = getValue(node, "縣市別");
+            //        item.應開戶數 = getValue(node, "應開戶數");
+            //        item.已開戶數 = getValue(node, "已開戶數");
+            //        return item;
+
+            //    })
+            //    .ToList();
+                
 
 
 
